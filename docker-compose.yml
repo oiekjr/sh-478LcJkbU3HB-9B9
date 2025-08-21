@@ -1,0 +1,27 @@
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.php
+    volumes:
+      - ./backend:/var/www
+
+  nginx:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.nginx
+      target: local
+    ports:
+      - "8000:80"
+    depends_on:
+      - php-fpm
+
+  node:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.node
+      target: local
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
