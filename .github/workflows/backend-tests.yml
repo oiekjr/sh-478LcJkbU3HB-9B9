@@ -48,7 +48,7 @@ jobs:
           {
             echo "APP_ENV=testing"
             echo "DB_CONNECTION=sqlite"
-            echo "DB_DATABASE=${GITHUB_WORKSPACE}/database/database.sqlite"
+            echo "DB_DATABASE=${GITHUB_WORKSPACE}/backend/database/database.sqlite"
           } >> .env
 
       - name: Generate Application Key
