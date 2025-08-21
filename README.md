@@ -34,3 +34,10 @@ docker compose exec php-fpm php artisan migrate --seed
 docker compose down -v --remove-orphans
 # もしくは `task down`
 ```
+
+### テスト実行
+
+```shell
+docker compose exec php-fpm php artisan test
+# もしくは `task test`
+```

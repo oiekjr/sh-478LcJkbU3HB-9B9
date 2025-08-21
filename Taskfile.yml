@@ -20,3 +20,7 @@ tasks:
     desc: 'データベースのマイグレーションを実行'
     cmds:
       - docker compose exec php-fpm php artisan migrate --seed
+  test:
+    desc: 'ユニットテストを実行'
+    cmds:
+      - docker compose exec php-fpm php artisan test

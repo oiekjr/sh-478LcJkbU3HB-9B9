@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->string('title')->comment('本のタイトル');
             $table->date('read_on')->comment('読んだ日付');
             $table->text('impression')->comment('読んだ感想');
-
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
