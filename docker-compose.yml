@@ -25,3 +25,11 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+
+  composer_install:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.php
+    volumes:
+      - ./backend:/var/www:delegated
+    command: composer install -o
