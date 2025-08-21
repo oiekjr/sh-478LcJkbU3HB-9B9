@@ -11,9 +11,16 @@ tasks:
   down:
     desc: '開発環境の停止'
     cmds:
-      - docker compose down -v --remove-orphans
+      - docker compose down --remove-orphans
   enter-php:
     desc: 'PHPコンテナに入る'
-    deps: [ up ]
     cmds:
       - docker compose exec php-fpm bash
+  migrate:
+    desc: 'データベースのマイグレーションを実行'
+    cmds:
+      - docker compose exec php-fpm php artisan migrate --seed
+  test:
+    desc: 'ユニットテストを実行'
+    cmds:
+      - docker compose exec php-fpm php artisan test

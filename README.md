@@ -19,9 +19,25 @@ docker compose up -d --build --force-recreate && docker compose logs -f
 # もしくは `task up`
 ```
 
+### マイグレーション実行
+
+⚠️ **初回は必ず実行すること**
+
+```shell
+docker compose exec php-fpm php artisan migrate --seed
+# もしくは `task migrate`
+```
+
 ### 停止手順
 
 ```shell
 docker compose down -v --remove-orphans
 # もしくは `task down`
+```
+
+### テスト実行
+
+```shell
+docker compose exec php-fpm php artisan test
+# もしくは `task test`
 ```
