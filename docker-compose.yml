@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: infra/Dockerfile.php
+    restart: unless-stopped
     volumes:
       - ./backend:/var/www
     depends_on:
@@ -14,6 +15,7 @@ services:
       context: .
       dockerfile: infra/Dockerfile.nginx
       target: local
+    restart: unless-stopped
     ports:
       - "8000:80"
     depends_on:
@@ -24,6 +26,7 @@ services:
       context: .
       dockerfile: infra/Dockerfile.node
       target: local
+    restart: unless-stopped
     ports:
       - "3000:3000"
     volumes:
@@ -40,6 +43,7 @@ services:
   db:
     image: mysql:8
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: docker
