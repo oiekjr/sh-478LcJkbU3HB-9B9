@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'frontend',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'ja',
     },
     meta: [
       { charset: 'utf-8' },
@@ -15,7 +15,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['ant-design-vue/dist/antd.css'],
+  css: ['ant-design-vue/dist/antd.css', '@/assets/css/global.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@/plugins/antd-ui'],
@@ -34,4 +34,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  watchers: {
+    webpack: {
+      poll: 1000,
+      aggregateTimeout: 300,
+    },
+  },
 }

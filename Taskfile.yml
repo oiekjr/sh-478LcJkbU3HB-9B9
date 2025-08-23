@@ -24,3 +24,7 @@ tasks:
     desc: 'ユニットテストを実行'
     cmds:
       - docker compose exec php-fpm php artisan test
+  format:
+    desc: 'コードのフォーマットとLintを実行'
+    cmds:
+      - docker compose exec node npm run lintfix
