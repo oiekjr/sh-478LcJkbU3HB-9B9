@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Reading;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReadingFactory extends Factory
@@ -15,7 +16,7 @@ class ReadingFactory extends Factory
             'title' => $this->faker->sentence(3),
             'read_on' => $this->faker->date(),
             'impression' => $this->faker->text(50),
+            'user_id' => User::factory(),
         ];
     }
 }
-
