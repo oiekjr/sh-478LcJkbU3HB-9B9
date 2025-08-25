@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // 読書記録
-Route::apiResource('readings', ReadingController::class);
+Route::middleware('auth:sanctum')->apiResource('readings', ReadingController::class);
