@@ -6,6 +6,7 @@ tasks:
   up:
     desc: '開発環境の起動'
     cmds:
+      - mkdir -p frontend/node_modules
       - docker compose up -d --build --force-recreate
       - docker compose logs -f
   down:

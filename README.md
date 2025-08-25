@@ -15,7 +15,9 @@
 ### 起動手順
 
 ```shell
-docker compose up -d --build --force-recreate && docker compose logs -f
+mkdir -p frontend/node_modules && \
+docker compose up -d --build --force-recreate && \
+docker compose logs -f
 # もしくは `task up`
 ```
 
