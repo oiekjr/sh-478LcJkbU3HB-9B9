@@ -46,7 +46,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'AppLogin',
+  name: 'LoginPage',
   data() {
     return {
       form: {
