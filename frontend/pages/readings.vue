@@ -80,7 +80,7 @@
         }}</span>
       </template>
       <template #impression="impression">
-        <div v-html="formatImpression(impression)"></div>
+        <div style="white-space: pre-wrap">{{ impression }}</div>
       </template>
       <template #action="_, record">
         <div class="action-col">
