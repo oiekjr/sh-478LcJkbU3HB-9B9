@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reading extends Model
 {
@@ -15,6 +16,7 @@ class Reading extends Model
         'title',
         'read_on',
         'impression',
+        'user_id',
     ];
 
     protected $casts = [
@@ -26,5 +28,10 @@ class Reading extends Model
         return Attribute::make(
             set: fn($value) => Carbon::parse($value)->tz(config('app.timezone'))->format('Y-m-d')
         );
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

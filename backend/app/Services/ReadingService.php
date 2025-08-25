@@ -3,28 +3,30 @@
 namespace App\Services;
 
 use App\Models\Reading;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReadingService
 {
-    public function getAll(): Collection
+    public function getAll($user): Collection
     {
-        return Reading::all();
+        return $user->readings()->get();
     }
 
-    public function getById($id): ?Reading
+    public function getById(User $user, $id): ?Reading
     {
-        return Reading::find($id);
+        return $user->readings()->find($id);
     }
 
-    public function create(array $data): Reading
+    public function create(User $user, array $data): Reading
     {
+        $data['user_id'] = $user->id;
         return Reading::create($data);
     }
 
-    public function update($id, array $data): ?Reading
+    public function update(User $user, $id, array $data): ?Reading
     {
-        $reading = Reading::find($id);
+        $reading = $user->readings()->find($id);
         if (!$reading) {
             return null;
         }
@@ -32,9 +34,9 @@ class ReadingService
         return $reading;
     }
 
-    public function delete($id): bool
+    public function delete(User $user, $id): bool
     {
-        $reading = Reading::find($id);
+        $reading = $user->readings()->find($id);
         if (!$reading) {
             return false;
         }
@@ -42,4 +44,3 @@ class ReadingService
         return true;
     }
 }
-
