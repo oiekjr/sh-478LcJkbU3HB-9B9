@@ -1,5 +1,5 @@
 <template>
-  <Tutorial />
+  <div></div>
 </template>
 
 <script lang="ts">
@@ -7,5 +7,8 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'IndexPage',
+  mounted() {
+    this.$router.replace('/login')
+  },
 })
 </script>

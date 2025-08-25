@@ -16,6 +16,10 @@ tasks:
     desc: 'PHPコンテナに入る'
     cmds:
       - docker compose exec php-fpm bash
+  enter-node:
+    desc: 'Node.jsコンテナに入る'
+    cmds:
+      - docker compose exec node bash
   migrate:
     desc: 'データベースのマイグレーションを実行'
     cmds:
@@ -24,3 +28,7 @@ tasks:
     desc: 'ユニットテストを実行'
     cmds:
       - docker compose exec php-fpm php artisan test
+  format:
+    desc: 'コードのフォーマットとLintを実行'
+    cmds:
+      - docker compose exec node npm run lintfix
