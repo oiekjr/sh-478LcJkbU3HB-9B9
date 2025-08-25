@@ -1,11 +1,13 @@
 export default {
-  /*
-   ** Runtime Config
-   */
-  publicRuntimeConfig: {
-    axios: {
-      baseURL: 'http://localhost:8000/api',
-    },
+  ssr: false,
+
+  router: {
+    middleware: ['auth'],
+  },
+
+  axios: {
+    baseURL: 'http://localhost:8000/api',
+    credentials: true,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -27,7 +29,7 @@ export default {
   css: ['ant-design-vue/dist/antd.css', '@/assets/css/global.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/antd-ui'],
+  plugins: ['@/plugins/antd-ui', '@/plugins/axios.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -39,7 +41,28 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+
+  auth: {
+    strategies: {
+      sanctum: {
+        provider: 'laravel/sanctum',
+        url: 'http://localhost:8000/api',
+        endpoints: {
+          csrf: { url: '/sanctum/csrf-cookie' },
+          login: { url: '/login', method: 'post' },
+          logout: { url: '/logout', method: 'post' },
+          user: { url: '/user', method: 'get' },
+        },
+      },
+    },
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/readings',
+      callback: false,
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

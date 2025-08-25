@@ -20,8 +20,8 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'AuthLayout',
   methods: {
-    logout() {
-      console.log('Logging out...')
+    async logout() {
+      await this.$auth.logout()
     },
   },
 })

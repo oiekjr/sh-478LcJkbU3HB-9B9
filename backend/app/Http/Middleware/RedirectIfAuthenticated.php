@@ -21,7 +21,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if ($request->wantsJson()) {
+                    return response()->json(['message' => 'ログイン済です']);
+                } else {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
 

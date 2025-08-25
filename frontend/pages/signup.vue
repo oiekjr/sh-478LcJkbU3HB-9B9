@@ -65,6 +65,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'SignupPage',
+  auth: false,
   data() {
     return {
       form: {
@@ -128,8 +129,25 @@ export default Vue.extend({
     },
   },
   methods: {
-    handleSubmit(_: Event) {
-      console.log(this.form)
+    async handleSubmit(_: Event) {
+      try {
+        // CSRFトークン取得
+        await this.$axios.$get('/sanctum/csrf-cookie')
+        // 新規登録API呼び出し
+        await this.$axios.$post('/register', {
+          name: this.form.nickname,
+          email: this.form.email,
+          password: this.form.password,
+          password_confirmation: this.form.passwordConfirm,
+        })
+        this.$message.success(
+          'アカウント登録が完了しました。ログインしてください。'
+        )
+        this.$router.push('/login')
+      } catch (error) {
+        // エラー時の処理
+        this.$message.error('アカウント登録に失敗しました')
+      }
     },
     passwordConfirmValidator(_rule: any, value: string, callback: Function) {
       if (value !== this.form.password) {

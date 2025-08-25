@@ -47,6 +47,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'LoginPage',
+  auth: false,
   data() {
     return {
       form: {
@@ -77,8 +78,18 @@ export default Vue.extend({
     }
   },
   methods: {
-    handleSubmit(_: Event) {
-      console.log(this.form)
+    async handleSubmit(_: Event) {
+      try {
+        await this.$auth.loginWith('sanctum', {
+          data: {
+            email: this.form.email,
+            password: this.form.password,
+          },
+        })
+        this.$router.push('/readings')
+      } catch (error) {
+        this.$message.error('ログインに失敗しました')
+      }
     },
   },
 })
